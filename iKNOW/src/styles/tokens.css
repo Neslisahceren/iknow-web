@@ -1,0 +1,92 @@
+/* ------------------------------------------------------------------
+   iKNOW Technology — Design Tokens
+   Single source of truth for colour, depth, motion and rhythm.
+   Corporate colours are expected to change; only this file should.
+   ------------------------------------------------------------------ */
+
+:root {
+  /* --- Raw palette -------------------------------------------------
+     Deep navy ramp, sampled from the hero artwork so painted surfaces and the
+     image sit on one hue line (~222deg) instead of reading as separate blocks.
+     The artwork's own ground measures #000212 and its dominant navy #000828 —
+     the two ends of this ramp. Nothing here is used directly by components;
+     always reference a semantic token below. */
+  --palette-ink-950: #01040f;
+  --palette-ink-900: #020819;
+  --palette-ink-850: #01050f;
+  --palette-ink-800: #041028;
+  --palette-ink-700: #071a40;
+  --palette-navy-600: #0c2352;
+  --palette-navy-500: #113066;
+  --palette-navy-400: #17417f;
+
+  --palette-blue-600: #0f5fd8;
+  --palette-blue-500: #1e7bff;
+  --palette-blue-400: #4a9bff;
+  --palette-blue-300: #86bdff;
+  --palette-ice-200: #c3dcff;
+  --palette-ice-100: #e4efff;
+
+  --palette-warm-500: #ff6a3d;
+  --palette-warm-400: #ff8b63;
+
+  --palette-white: #ffffff;
+  --palette-paper-050: #f5f8ff;
+  --palette-paper-100: #eaf1ff;
+  --palette-paper-200: #dbe7fb;
+
+  /* --- Brand ------------------------------------------------------- */
+  --brand-primary: var(--palette-navy-500);
+  --brand-secondary: var(--palette-blue-600);
+  --brand-accent: var(--palette-blue-500);
+  --brand-warm: var(--palette-warm-500);
+
+  /* --- Surfaces ---------------------------------------------------- */
+  --surface-deep: var(--palette-ink-950);
+  --surface-dark: var(--palette-ink-900);
+  --surface-raised: var(--palette-ink-800);
+  --surface-light: var(--palette-paper-050);
+  --surface-light-alt: var(--palette-paper-100);
+
+  /* --- Text -------------------------------------------------------- */
+  --text-primary: var(--palette-white);
+  --text-secondary: #a8bad9;
+  --text-muted: #6b7fa3;
+  --text-ink: #0a1c3f;
+  --text-ink-soft: #46608f;
+  --text-eyebrow: var(--palette-blue-400);
+
+  /* --- Lines & edges ----------------------------------------------- */
+  --border-dark: rgba(134, 189, 255, 0.14);
+  --border-dark-strong: rgba(134, 189, 255, 0.28);
+  --border-light: rgba(16, 52, 116, 0.14);
+  --border-light-strong: rgba(16, 52, 116, 0.26);
+
+  /* --- Light / glow ------------------------------------------------ */
+  --glow-accent: rgba(30, 123, 255, 0.55);
+  --glow-accent-soft: rgba(30, 123, 255, 0.18);
+  --glow-warm: rgba(255, 106, 61, 0.5);
+
+  /* --- Depth ------------------------------------------------------- */
+  --shadow-ambient: 0 30px 80px -30px rgba(2, 6, 18, 0.9);
+  --shadow-light-panel: 0 24px 60px -28px rgba(12, 40, 96, 0.28);
+
+  /* --- Rhythm ------------------------------------------------------ */
+  --shell-width: 1240px;
+  --shell-gutter: clamp(1.25rem, 4vw, 4rem);
+  --section-space: clamp(5rem, 9vw, 9.5rem);
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-pill: 999px;
+
+  /* --- Type -------------------------------------------------------- */
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --tracking-eyebrow: 0.22em;
+
+  /* --- Motion ------------------------------------------------------ */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 220ms;
+  --dur-base: 420ms;
+  --dur-slow: 900ms;
+}

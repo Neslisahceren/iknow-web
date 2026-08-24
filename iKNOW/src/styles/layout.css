@@ -1,0 +1,378 @@
+/* ------------------------------------------------------------------
+   Layout — shell, sections and the transitions between light and dark
+   ------------------------------------------------------------------ */
+
+.site-shell {
+  position: relative;
+  min-height: 100vh;
+  background: var(--surface-deep);
+  /* Restated rather than inherited from `body`: `body` resolves
+     `--text-primary` against `:root`, and the resulting colour then inherits
+     down as an already-computed value. Declaring it again here re-resolves it
+     inside whichever shell theme is active, which is what lets headings that
+     set no colour of their own follow the light ground. */
+  color: var(--text-primary);
+  isolation: isolate;
+}
+
+.shell {
+    min-height: 100%;
+  align-items: center;
+  width: 100%;
+  max-width: calc(var(--shell-width) + var(--shell-gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--shell-gutter);
+
+  
+}
+
+.section--dark > .shell {
+  width: 100%;
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-space);
+}
+
+/* Dark and light grounds. Sections declare their own ground so a page can
+   move between them without any wrapper knowing the order. */
+
+.section--dark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--surface-deep);
+  color: var(--text-primary);
+}
+
+/* Home's first dark band. The panel is centred in whatever height is left
+   above the marks rather than in the viewport, and the marks rule closes the
+   section — hence no bottom padding beyond a single breathing step.
+   The viewport-relative floor lives here rather than on `.section--dark`:
+   it is what gives the panel free space to be centred in, and every other
+   dark band should simply be as tall as its own content. Applied to all of
+   them, a short closing CTA was inflated to 80vh and left a few hundred
+   pixels of empty ground above the footer. */
+.section--summary {
+  min-height: 80vh;
+  padding-top: 0;
+  padding-bottom: clamp(2rem, 3.4vw, 3rem);
+}
+
+.section--summary > .shell {
+  flex: 1;
+  display: grid;
+  /* Free space to the panel's row; the marks keep their intrinsic height and
+     stay pinned to the bottom edge. */
+  grid-template-rows: 1fr auto;
+}
+
+.section--summary .summary-panel {
+  align-self: center;
+}
+
+/* The rule is the row boundary, so the marks carry no top margin here: the
+   free space above and below the panel is then symmetric about it. */
+.section--summary .marks {
+  margin-top: 0;
+}
+
+.section--light {
+  background: var(--surface-light);
+  color: var(--text-ink);
+}
+
+.section--light-alt {
+  background: linear-gradient(
+    170deg,
+    var(--surface-light) 0%,
+    var(--surface-light-alt) 55%,
+    var(--surface-light) 100%
+  );
+  color: var(--text-ink);
+}
+
+/* ------------------------------------------------------------------
+   Section transitions — the light bands are lifted into the dark ones on
+   a wide, shallow curve rather than a straight edge, so the page reads as
+   one continuous surface instead of stacked blocks.
+   ------------------------------------------------------------------ */
+
+.transition {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: clamp(3.5rem, 7vw, 7rem);
+  margin-bottom: -1px;
+  pointer-events: none;
+}
+
+.transition svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.transition--to-light {
+  background: var(--surface-deep);
+}
+
+.transition--to-dark {
+  background: var(--surface-light);
+  /* Overlap on both sides: with preserveAspectRatio="none" the path edge
+     lands on a subpixel and leaves a hairline otherwise. */
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+
+/* ------------------------------------------------------------------
+   Header
+   ------------------------------------------------------------------ */
+
+.site-header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 40;
+  padding-block: clamp(1.1rem, 2vw, 1.75rem);
+}
+
+.site-header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  /* Overrides .shell: the reference header is full bleed with its own gutter. */
+  max-width: none;
+  padding-inline: clamp(1.25rem, 4.6vw, 5.5rem);
+}
+
+.site-header--scrolled {
+  position: fixed;
+  background: rgba(1, 6, 20, 0.84);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-dark);
+  padding-block: 0.85rem;
+  animation: header-drop var(--dur-base) var(--ease-out-expo) both;
+}
+
+@keyframes header-drop {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* --- Wordmark ------------------------------------------------------- */
+
+.wordmark {
+  display: inline-flex;
+  text-decoration: none;
+}
+
+/* The lockup is supplied artwork, scaled from the shared identity size. */
+.wordmark__image {
+  display: block;
+  width: calc(var(--wordmark-size, 1.32rem) * 2);
+  height: auto;
+  user-select: none;
+}
+
+/* The header carries the identity on its own, so its lockup runs larger. */
+.site-header .wordmark {
+  /* 3.94vw x 3.28 = 12.9% of the viewport, matching the reference header. */
+  --wordmark-size: clamp(1.55rem, 3.94vw, 5.1rem);
+}
+
+/* --- Primary navigation --------------------------------------------- */
+
+.nav {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(1.1rem, 2.2vw, 2.1rem);
+}
+
+/* Clustered toward the end of the bar rather than stretched across it: the
+   list keeps its intrinsic width and `.nav`'s `flex: 1` + `justify-content:
+   flex-end` is what pushes the whole group flush right, leaving one wide gap
+   after the wordmark instead of scattering the links to fill it. */
+.nav__list {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(1.4rem, 2.1vw, 2.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav__link {
+  position: relative;
+  display: inline-block;
+  /* Extra room below the label: the indicator anchors to this box's bottom
+     edge, so widening the gap here is what moves it clear of the text
+     instead of hugging the baseline. */
+  padding-block: 0.35rem 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-soft);
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: var(--brand-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-out-expo);
+}
+
+.nav__link:hover,
+.nav__link[aria-current="page"] {
+  color: var(--text-primary);
+}
+
+.nav__link[aria-current="page"]::after,
+.nav__link:hover::after {
+  transform: scaleX(1);
+}
+
+@media (min-width: 1024px) {
+  /* The links live in the bar itself on every route, home included: collapsing
+     them behind the trigger is the narrow-screen behaviour, and carrying it
+     into desktop leaves the bar with two items at its extremes. */
+  .nav .menu-trigger {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .nav__list {
+    display: none;
+  }
+}
+
+/* --- Menu trigger ---------------------------------------------------- */
+
+.menu-trigger {
+  display: grid;
+  place-items: center;
+  /* At least 44px for the pointer target, scaling with the reference glyph. */
+  width: clamp(2.75rem, 3.4vw, 4.3rem);
+  height: clamp(2.75rem, 3.4vw, 4.3rem);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.menu-trigger__glyph {
+  display: grid;
+  gap: clamp(0.34rem, 0.55vw, 0.6rem);
+  width: clamp(1.15rem, 2.4vw, 3rem);
+}
+
+.menu-trigger__glyph span {
+  display: block;
+  height: 1px;
+  background: currentColor;
+  transition: transform var(--dur-base) var(--ease-out-expo),
+    opacity var(--dur-fast) var(--ease-soft);
+}
+
+.menu-trigger[aria-expanded="true"] .menu-trigger__glyph span:first-child {
+  transform: translateY(0.35rem) rotate(45deg);
+}
+
+.menu-trigger[aria-expanded="true"] .menu-trigger__glyph span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-trigger[aria-expanded="true"] .menu-trigger__glyph span:last-child {
+  transform: translateY(-0.35rem) rotate(-45deg);
+}
+
+/* ------------------------------------------------------------------
+   Hero shells
+   ------------------------------------------------------------------ */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--surface-deep);
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 5;
+}
+
+/* Home: the composition sits at the true centre of the hero box. Both axes
+   are needed — `align-items` only centres the shell inside its grid row, and
+   that row is content-height, so `align-content` is what centres the row
+   itself in the 100vh container. */
+.hero--home {
+  display: grid;
+  place-content: center;
+  place-items: center;
+  min-height: 100svh;
+  min-height: 100vh;
+}
+
+/* The shell still spans the hero; only its contents are centred. */
+.hero--home > .hero__inner {
+  justify-self: stretch;
+}
+
+/* Inner pages: a compact band, not a restaging of the home hero. The floor
+   is intentionally low — real content (heading, lede, action) is almost
+   always what actually sets the height; the clamp only stops very short
+   copy (Contact, 404) from collapsing the artwork into a sliver. */
+.hero--page {
+  display: grid;
+  align-items: center;
+  min-height: clamp(14rem, 24vh, 18rem);
+  padding-top: 6rem;
+}
+
+/* `u-display` is sized as "hero-scale statement type" for the home wordmark
+   composition it was written for — it isn't used there, only here, but at
+   that scale a two-line inner-page title alone ran to ~150px and made the
+   band read as a second home hero. Scoped down to a title, not a statement;
+   the class definition itself is untouched. */
+.hero--page .u-display {
+  font-size: clamp(1.9rem, 3.4vw, 3.1rem);
+  line-height: 1.08;
+}
+
+.hero--page .u-eyebrow {
+  margin-bottom: 0.85rem;
+}
+
+/* Portrait: the artwork takes the top of the screen, so the lockup drops into
+   the lower half rather than sitting inside the graphic. */
+@media (max-width: 860px) {
+  .hero--home {
+    align-content: end;
+    padding-bottom: clamp(6rem, 20vh, 11rem);
+  }
+}
+
+.footer-surface-host {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+

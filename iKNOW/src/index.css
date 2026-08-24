@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* Design tokens live in ./styles/tokens.css and are imported from main.tsx.
+   The bridge below has to sit beside the Tailwind import so the plugin sees
+   it, but it only re-points Tailwind's names at those same variables — no
+   colour value is ever declared twice. */
+/* Tailwind v4 theme bridge — semantic utilities only, no raw hex. */
+@theme inline {
+  --color-surface-deep: var(--surface-deep);
+  --color-surface-dark: var(--surface-dark);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-light: var(--surface-light);
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-warm: var(--brand-warm);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-ink: var(--text-ink);
+  --font-sans: var(--font-sans);
+}

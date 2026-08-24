@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="iKNOW Technology">
+  <rect width="64" height="64" rx="12" fill="#02050d"/>
+  <!-- The identity mark: the warm dot-and-stem "i" beside the white K. -->
+  <circle cx="16.5" cy="17" r="4.6" fill="#ff6a3d"/>
+  <rect x="12.4" y="25" width="8.2" height="26" rx="1.4" fill="#ff6a3d"/>
+  <path d="M28 25h8.4v10.6L46 25h9.6L44.2 37.9 56 51h-9.9l-9.7-11.2V51H28z" fill="#ffffff"/>
+</svg>

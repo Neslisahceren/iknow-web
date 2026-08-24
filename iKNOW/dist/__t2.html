@@ -1,0 +1,21 @@
+<!doctype html><meta charset=utf-8>
+<body style="margin:0;font:12px monospace;background:#fff">
+<iframe id=f src="/careers" style="width:1440px;height:900px;border:0"></iframe>
+<pre id=o></pre>
+<script>
+const f=document.getElementById('f');
+f.onload=()=>setTimeout(()=>{
+ const d=f.contentDocument,w=f.contentWindow;
+ d.getElementById('careers-name').value='Test Kişi';
+ d.getElementById('careers-email').value='test@example.com';
+ d.getElementById('careers-position').value='Yazılım Mühendisi (Backend)';
+ const form = d.querySelector('.form');
+ // File input can't be set programmatically for security, but it's not required by our JS logic to test submit path visually.
+ form.querySelector('#careers-cv').removeAttribute('required');
+ form.requestSubmit();
+ setTimeout(()=>{
+  const status=d.querySelector('.form__status');
+  document.getElementById('o').textContent = 'status="'+status.textContent+'"';
+ }, 300);
+},1800);
+</script>

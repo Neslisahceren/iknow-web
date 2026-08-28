@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+  <url>
+    <loc>https://iknow.solutions/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://iknow.solutions/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknow.solutions/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknow.solutions/" />
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://iknow.solutions/solutions</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://iknow.solutions/solutions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknow.solutions/en/solutions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknow.solutions/solutions" />
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://iknow.solutions/companies</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://iknow.solutions/companies" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknow.solutions/en/companies" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknow.solutions/companies" />
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://iknow.solutions/customers</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://iknow.solutions/customers" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknow.solutions/en/customers" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknow.solutions/customers" />
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://iknow.solutions/about</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://iknow.solutions/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknow.solutions/en/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknow.solutions/about" />
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://iknow.solutions/careers</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://iknow.solutions/careers" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknow.solutions/en/careers" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknow.solutions/careers" />
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iknow.solutions/contact</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://iknow.solutions/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknow.solutions/en/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknow.solutions/contact" />
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://iknow.solutions/en</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://iknow.solutions/en/solutions</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://iknow.solutions/en/companies</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iknow.solutions/en/customers</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iknow.solutions/en/about</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iknow.solutions/en/careers</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://iknow.solutions/en/contact</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>

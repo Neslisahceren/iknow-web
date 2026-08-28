@@ -1,0 +1,18 @@
+<!doctype html><meta charset=utf-8>
+<body style="margin:0;font:12px monospace;background:#fff">
+<iframe id=f src="/careers" style="width:1440px;height:300px;border:0"></iframe>
+<pre id=o></pre>
+<script>
+const f=document.getElementById('f');
+f.onload=()=>setTimeout(()=>{
+ const d=f.contentDocument,w=f.contentWindow;
+ const sel=d.getElementById('careers-position');
+ const opts=[...sel.options].map(o=>o.value);
+ sel.value = opts[opts.length-1];
+ sel.dispatchEvent(new w.Event('change', {bubbles:true}));
+ setTimeout(()=>{
+  const other=d.getElementById('careers-position-other');
+  document.getElementById('o').textContent = 'options='+JSON.stringify(opts)+' otherFieldPresent='+!!other;
+ }, 300);
+},1800);
+</script>

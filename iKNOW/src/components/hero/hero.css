@@ -1,0 +1,305 @@
+/* ------------------------------------------------------------------
+   Hero — the supplied artwork plus the animated edge light.
+
+   The WebP carries the design. Nothing here recreates it, tints it or lays a
+   decorative gradient over it; the only overlay is a readability scrim, and
+   only where copy actually sits on top of the image.
+   ------------------------------------------------------------------ */
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--surface-deep);
+}
+
+/* Cropped, never stretched: `cover` preserves the artwork's aspect ratio and
+   the anchor decides which part survives the crop. */
+.hero-bg__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Anchored right so the large organic forms are what stays in frame.
+     HeroRimLight mirrors this with preserveAspectRatio="xMaxYMid slice" —
+     change one and the light comes off the edge. */
+  object-position: 100% 50%;
+  user-select: none;
+}
+
+/* Non-home sections re-frame the same file rather than carrying artwork of
+   their own. The home crop (`100% 50%`) shows the full disc *and* the wedge
+   beneath it because the hero is nearly the full viewport; a page hero is a
+   fraction of that height, so the same crop would put the wedge's point
+   directly under the header instead of the curve.
+   An earlier version gave the background layer a fixed short height instead
+   of the usual `inset: 0`, so the crop stayed calm — but that left the rest
+   of the hero (however tall its copy made it) as flat, imageless ground: a
+   dead navy block between the picture and whatever follows. The layer needs
+   to fill the whole hero, the way it does everywhere else, so there is no
+   second surface to seam against. Scale does the cropping instead: zoomed in
+   from its top-right anchor, the visible window is pulled in tight enough
+   that the wedge stays out of frame at any hero height or viewport width. */
+.hero-bg--page .hero-bg__image {
+  object-position: 100% 0%;
+  transform: scale(1.4);
+  transform-origin: 100% 0%;
+}
+
+.hero-bg--mission .hero-bg__image {
+  object-position: 100% 62%;
+}
+
+.hero-bg--footer {
+  opacity: 0.42;
+}
+
+.hero-bg--footer .hero-bg__image {
+  object-position: 100% 78%;
+}
+
+/* --- The travelling edge light --------------------------------------- */
+
+.hero-rim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero-rim__core,
+.hero-rim__glow,
+.hero-rim__ambient {
+  fill: none;
+  stroke-linecap: round;
+}
+
+/* Hairline. This is the light itself; the other two are what it throws. */
+.hero-rim__core {
+  stroke: #ffb888;
+  stroke-width: 1.4;
+  opacity: 0.95;
+}
+
+.hero-rim__glow {
+  stroke: #ff7a2e;
+  stroke-width: 3.4;
+  opacity: 0.5;
+}
+
+.hero-rim__ambient {
+  stroke: #ff6a2a;
+  stroke-width: 9;
+  opacity: 0.22;
+}
+
+/* --- Compact viewports ------------------------------------------------
+   The crop is tighter, so the strokes are scaled with it — otherwise the
+   hairline thickens visually as the image scales up. Blur is also the most
+   expensive part of this layer, so the ambient pass is dropped on small
+   screens where it reads least. */
+
+@media (max-width: 860px) {
+  /* Portrait heroes are narrower and often taller (wrapped copy), which is
+     exactly the aspect where an un-zoomed crop would let the wedge back into
+     frame — so the mobile crop is zoomed in further than the desktop one. */
+  .hero-bg--page .hero-bg__image {
+    transform: scale(1.9);
+  }
+
+  .hero-rim__core {
+    stroke-width: 2.2;
+  }
+
+  .hero-rim__glow {
+    stroke-width: 5;
+    opacity: 0.42;
+  }
+
+  .hero-rim__ambient {
+    display: none;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rim__ambient {
+    display: none;
+  }
+}
+
+/* --- The travelling reflection ---------------------------------------
+   A clipped frame holding one soft band of light. The frame is what keeps
+   the band from painting outside the hero; the band is the only thing that
+   moves, and only via transform and opacity. */
+
+.hero-sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-sheen__band {
+  position: absolute;
+  /* Wider and taller than the hero so the band is fully off-frame at both
+     ends of its travel, and raked to follow the artwork's diagonal. */
+  inset: -30% -40%;
+  background: linear-gradient(
+    104deg,
+    transparent 42%,
+    rgba(150, 190, 245, 0.16) 47%,
+    rgba(226, 240, 255, 0.3) 50%,
+    rgba(150, 190, 245, 0.16) 53%,
+    transparent 58%
+  );
+  /* Multiplies the luminance already there instead of adding light of its
+     own, so the existing highlights flare and the dark ground stays dark. */
+  mix-blend-mode: overlay;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Portrait crops the artwork much tighter, so the same band covers far more
+   of the visible surface — it is softened to compensate. */
+@media (max-width: 860px) {
+  .hero-sheen__band {
+    opacity: 0;
+    background: linear-gradient(
+      104deg,
+      transparent 38%,
+      rgba(150, 190, 245, 0.18) 46%,
+      rgba(226, 240, 255, 0.32) 50%,
+      rgba(150, 190, 245, 0.18) 54%,
+      transparent 62%
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-sheen {
+    display: none;
+  }
+}
+
+/* --- Inner-page hero: drawn light, not a photograph -------------------
+   Two large soft-edged swoops plus a bright disc, all blurred ellipses
+   rather than sharp shapes, with a pair of thin curved rim strokes riding
+   their edge. The swoops carry the composition — bright enough to read from
+   across the hero, the way the reference's lit surfaces do — while the
+   blur keeps every edge soft, so this stays ambient light rather than a
+   decorative sticker sitting on the dark ground. */
+
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-glow__shape {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.hero-glow__shape--sweep {
+  top: -32%;
+  right: -22%;
+  width: 62vw;
+  height: 62vw;
+  max-width: 54rem;
+  max-height: 54rem;
+  background: radial-gradient(
+    circle at 38% 62%,
+    rgba(90, 165, 255, 0.55),
+    rgba(45, 120, 235, 0.22) 45%,
+    transparent 70%
+  );
+  filter: blur(50px);
+}
+
+.hero-glow__shape--band {
+  top: 12%;
+  right: -8%;
+  width: 44vw;
+  height: 20vw;
+  max-width: 38rem;
+  max-height: 17rem;
+  transform: rotate(-18deg);
+  border-radius: 50% / 45%;
+  background: radial-gradient(
+    ellipse,
+    rgba(150, 200, 255, 0.4),
+    rgba(80, 150, 255, 0.1) 60%,
+    transparent 78%
+  );
+  filter: blur(60px);
+}
+
+.hero-glow__shape--pool {
+  bottom: -28%;
+  right: 4%;
+  width: 26vw;
+  height: 26vw;
+  max-width: 22rem;
+  max-height: 22rem;
+  background: radial-gradient(
+    circle,
+    rgba(134, 189, 255, 0.32),
+    rgba(78, 148, 255, 0.08) 65%,
+    transparent 80%
+  );
+  filter: blur(55px);
+}
+
+.hero-glow__lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-glow__stroke {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.hero-glow__stroke--soft {
+  stroke: #4a9bff;
+  stroke-width: 30;
+  opacity: 0.22;
+  filter: blur(16px);
+}
+
+.hero-glow__stroke--core {
+  stroke: #bcdcff;
+  stroke-width: 2;
+  opacity: 0.7;
+}
+
+@media (max-width: 860px) {
+  .hero-glow__shape--sweep {
+    width: 90vw;
+    height: 90vw;
+    right: -34%;
+  }
+
+  .hero-glow__shape--band {
+    width: 70vw;
+    height: 32vw;
+  }
+
+  .hero-glow__shape--pool {
+    width: 46vw;
+    height: 46vw;
+  }
+
+  .hero-glow__stroke--soft {
+    stroke-width: 20;
+  }
+}

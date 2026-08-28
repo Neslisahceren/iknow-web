@@ -1,0 +1,83 @@
+/* ------------------------------------------------------------------
+   Typography — one editorial scale shared by every page
+   ------------------------------------------------------------------ */
+
+.u-eyebrow {
+  margin: 0 0 1.25rem;
+  color: var(--text-eyebrow);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.u-eyebrow--ink {
+  color: var(--brand-secondary);
+}
+
+/* Hero-scale statement type. */
+.u-display {
+  margin: 0;
+  font-size: clamp(2.5rem, 5.2vw, 4.6rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.03;
+}
+
+/* Section-scale statement type. */
+.u-headline {
+  margin: 0;
+  font-size: clamp(1.9rem, 3.6vw, 3.25rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+}
+
+.u-subhead {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.18;
+}
+
+.u-lede {
+  margin: 0;
+  max-width: 34rem;
+  color: var(--text-secondary);
+  font-size: clamp(0.9rem, 1.05vw, 1rem);
+  line-height: 1.75;
+}
+
+.u-body {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+/* Ink variants for light sections. */
+.u-ink {
+  color: var(--text-ink);
+}
+
+.u-ink-soft {
+  color: var(--text-ink-soft);
+}
+
+.u-accent {
+  color: var(--brand-accent);
+}
+
+/* The single-character brand full stop used across headline endings. */
+.u-period {
+  color: var(--brand-accent);
+}
+
+.u-measure-sm {
+  max-width: 18ch;
+}
+
+.u-measure-md {
+  max-width: 24ch;
+}
